@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 
-function Watchlist({ watchList }) {
+function Watchlist({ watchList ,setwatchList}) {
   const [searchField, setsearchField] = useState(""); // search field state
   let handleSearch = (e) => {
     setsearchField(e.target.value);
+  };
+  let sortIncreasing = () => {
+    let sortedInc=watchList.sort((movieA, movieB) => {
+      return movieA.vote_average - movieB.vote_average;
+    });
+    setwatchList([...sortedInc])
+  };
+  let sortDecreasing = () => {
+    let sortedDec=watchList.sort((movieA, movieB) => {
+      return movieB.vote_average - movieA.vote_average;
+    });
+    setwatchList([...sortedDec])
   };
   return (
     <>
@@ -32,7 +44,15 @@ function Watchlist({ watchList }) {
           <thead className="border-b-2">
             <tr>
               <th>Name</th>
-              <th>Ratings</th>
+              <th className="flex justify-center">
+                <div onClick={sortIncreasing} className="p-2 hover:cursor-pointer">
+                  <i className="fa-solid fa-arrow-up"></i>
+                </div>
+                <div className="p-2">Ratings</div>
+                <div onClick={sortDecreasing} className="p-2 hover:cursor-pointer">
+                  <i className="fa-solid fa-arrow-down"></i>
+                </div>
+              </th>
               <th>Popularity</th>
               <th>Genre</th>
             </tr>
