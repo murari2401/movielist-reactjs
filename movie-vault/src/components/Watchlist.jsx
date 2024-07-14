@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Watchlist({ watchList }) {
+  const [searchField, setsearchField] = useState(""); // search field state
+  let handleSearch = (e) => {
+    setsearchField(e.target.value);
+  };
   return (
     <>
       <div className="flex flex-wrap justify-center m-4">
@@ -16,6 +20,8 @@ function Watchlist({ watchList }) {
       </div>
       <div className="flex justify-center my-8">
         <input
+          onChange={handleSearch}
+          value={searchField}
           type="text"
           placeholder="Search movies"
           className="h-[3rem] w-[25rem] bg-gray-300 outline-none px-4 text-xl rounded-xl"
@@ -32,10 +38,15 @@ function Watchlist({ watchList }) {
             </tr>
           </thead>
           <tbody>
-            {watchList.map((movieObj, index) => {
-              return (
-                <>
-                  <tr>
+            {watchList
+              .filter((movieObj) => {
+                return movieObj.title
+                  .toLowerCase()
+                  .includes(searchField.toLocaleLowerCase());
+              })
+              .map((movieObj) => {
+                return (
+                  <tr key={movieObj.id}>
                     <td className="flex items-center px-6 py-4">
                       <img
                         className="h-[6rem] w-[6rem]"
@@ -51,9 +62,8 @@ function Watchlist({ watchList }) {
                       <h2 className="hover:cursor-pointer">Delete</h2>
                     </td>
                   </tr>
-                </>
-              );
-            })}
+                );
+              })}
           </tbody>
         </table>
       </div>
