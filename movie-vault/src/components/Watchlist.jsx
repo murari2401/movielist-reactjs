@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import genreids from "../Utility/genre";
 function Watchlist({ watchList ,setwatchList, handleDelFromWatchList}) {
   const [searchField, setsearchField] = useState(""); // search field state
   let handleSearch = (e) => {
@@ -77,7 +77,7 @@ function Watchlist({ watchList ,setwatchList, handleDelFromWatchList}) {
                     </td>
                     <td>{movieObj.vote_average}</td>
                     <td>{movieObj.popularity}</td>
-                    <td>Scifi</td>
+                    <td>{genreids[movieObj.genre_ids[0]]}</td>
                     <td className="text-red-900">
                       <h2 onClick={()=>{handleDelFromWatchList(movieObj)}} className="hover:cursor-pointer">Delete</h2>
                     </td>
