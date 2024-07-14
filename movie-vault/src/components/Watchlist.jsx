@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Watchlist({ watchList ,setwatchList}) {
+function Watchlist({ watchList ,setwatchList, handleDelFromWatchList}) {
   const [searchField, setsearchField] = useState(""); // search field state
   let handleSearch = (e) => {
     setsearchField(e.target.value);
@@ -79,7 +79,7 @@ function Watchlist({ watchList ,setwatchList}) {
                     <td>{movieObj.popularity}</td>
                     <td>Scifi</td>
                     <td className="text-red-900">
-                      <h2 className="hover:cursor-pointer">Delete</h2>
+                      <h2 onClick={()=>{handleDelFromWatchList(movieObj)}} className="hover:cursor-pointer">Delete</h2>
                     </td>
                   </tr>
                 );
