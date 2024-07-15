@@ -23,6 +23,7 @@ function Watchlist({ watchList, setwatchList, handleDelFromWatchList }) {
     setcurrentGenre(genre);
   };
   useEffect(() => {
+    document.title="Watchlist";
     let temp = watchList.map((movieObj) => {
       return genreids[movieObj.genre_ids[0]];
     });
